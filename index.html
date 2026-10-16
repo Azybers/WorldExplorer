@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="AI World Explorer helps you explore pictures of plants, animals, objects, and more.">
+  <title>AI World Explorer</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="AI World Explorer home">
+      <span class="brand-mark">◎</span><span>AI World <strong>Explorer</strong></span>
+    </a>
+    <div class="header-actions">
+      <label class="language-label" for="language">Language</label>
+      <select id="language" aria-label="Language">
+        <option value="en">English</option><option value="fil">Filipino</option>
+      </select>
+      <button id="accountButton" class="button button-quiet" type="button">Sign in</button>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow" data-en="DISCOVER THE WORLD AROUND YOU" data-fil="TUKLASIN ANG MUNDO SA PALIGID MO">DISCOVER THE WORLD AROUND YOU</p>
+      <h1 data-en="What did you discover today?" data-fil="Ano ang natuklasan mo ngayon?">What did you discover today?</h1>
+      <p class="hero-copy" data-en="Upload a picture to explore plants, animals, everyday objects, and more." data-fil="Mag-upload ng larawan para tuklasin ang mga halaman, hayop, pang-araw-araw na bagay, at iba pa.">Upload a picture to explore plants, animals, everyday objects, and more.</p>
+      <div class="upload-card">
+        <div class="upload-icon" aria-hidden="true">↥</div>
+        <h2 data-en="Identify a picture" data-fil="Kilalanin ang isang larawan">Identify a picture</h2>
+        <p data-en="Choose a clear photo. The AI model runs in your browser after it loads." data-fil="Pumili ng malinaw na larawan. Tumatakbo ang AI model sa browser mo kapag na-load na.">Choose a clear photo. The AI model runs in your browser after it loads.</p>
+        <input id="imageInput" type="file" accept="image/*" hidden>
+        <button id="chooseButton" class="button button-primary" type="button" data-en="Choose a picture" data-fil="Pumili ng larawan">Choose a picture</button>
+        <span class="privacy-note" data-en="Image classification runs on your device in the browser. The model downloads from a public CDN; your selected photo is not sent to an AI API by this feature." data-fil="Sa browser ng device mo tumatakbo ang pagkilala. Dina-download ang model mula sa pampublikong CDN; hindi ipinapadala sa AI API ang pinili mong larawan sa feature na ito.">Image classification runs on your device in the browser. The model downloads from a public CDN; your selected photo is not sent to an AI API by this feature.</span>
+      </div>
+    </section>
+    <section id="previewSection" class="result-section hidden" aria-live="polite">
+      <div class="section-heading">
+        <div><p class="eyebrow" data-en="YOUR PHOTO" data-fil="IYONG LARAWAN">YOUR PHOTO</p><h2 data-en="AI picture results" data-fil="Resulta ng AI sa larawan">AI picture results</h2></div>
+        <button id="clearPreview" class="button button-quiet" type="button" data-en="Remove photo" data-fil="Alisin ang larawan">Remove photo</button>
+      </div>
+      <div class="preview-layout">
+        <img id="imagePreview" alt="Your selected picture preview">
+        <div class="preview-info">
+          <h3 id="resultTitle" data-en="Ready to identify" data-fil="Handa nang kilalanin">Ready to identify</h3>
+          <p id="resultMessage" data-en="Choose a picture, then tap Identify picture. First use needs an internet connection to download the AI model." data-fil="Pumili ng larawan at pindutin ang Kilalanin ang larawan. Kailangan ng internet sa unang paggamit para ma-download ang AI model.">Choose a picture, then tap Identify picture. First use needs an internet connection to download the AI model.</p>
+          <button id="identifyButton" class="button button-primary" type="button" data-en="Identify picture" data-fil="Kilalanin ang larawan">Identify picture</button>
+          <div id="predictions" class="prediction-list"></div>
+          <label class="field-label" for="notes" data-en="Your notes (optional)" data-fil="Mga tala mo (opsyonal)">Your notes (optional)</label>
+          <textarea id="notes" rows="3" placeholder="Where did you find it? / Saan mo ito nakita?"></textarea>
+          <button id="saveButton" class="button button-primary" type="button" data-en="Save to my collection" data-fil="I-save sa aking koleksyon">Save to my collection</button>
+        </div>
+      </div>
+    </section>
+    <section class="collection-section" id="collection">
+      <div class="section-heading"><div><p class="eyebrow" data-en="YOUR PERSONAL LIBRARY" data-fil="IYONG PERSONAL NA LIBRARYA">YOUR PERSONAL LIBRARY</p><h2 data-en="My collection" data-fil="Aking koleksyon">My collection</h2></div><span id="collectionCount" class="count-pill">0 items</span></div>
+      <div id="collectionGrid" class="collection-grid"><div class="empty-state" id="emptyState"><span aria-hidden="true">▧</span><h3 data-en="Your discoveries will live here" data-fil="Dito makikita ang iyong mga tuklas">Your discoveries will live here</h3><p data-en="Choose a picture above, then save it to start your collection." data-fil="Pumili ng larawan sa itaas at i-save ito para simulan ang iyong koleksyon.">Choose a picture above, then save it to start your collection.</p></div></div>
+      <p class="storage-note" data-en="Saved items stay in this browser on this device. Clearing browser data may delete them. This is not cloud backup yet." data-fil="Sa browser at device na ito naka-save ang mga item. Maaaring mabura ang mga ito kapag nilinis ang browser data. Wala pang cloud backup.">Saved items stay in this browser on this device. Clearing browser data may delete them. This is not cloud backup yet.</p>
+    </section>
+  </main>
+  <footer><span>AI World Explorer</span><span data-en="Explore thoughtfully. Verify important identifications." data-fil="Maging mapanuri. Suriin ang mahahalagang pagkakakilanlan.">Explore thoughtfully. Verify important identifications.</span></footer>
+  <dialog id="accountDialog"><form method="dialog" class="dialog-content"><button class="dialog-close" aria-label="Close" value="cancel">×</button><p class="eyebrow">AI WORLD EXPLORER</p><h2 data-en="Accounts are not connected yet" data-fil="Hindi pa nakakonekta ang mga account">Accounts are not connected yet</h2><p data-en="This version saves items only in this browser. Private sign-in and cloud backup must be added separately." data-fil="Sa bersyong ito, sa browser lang naka-save ang mga item. Kailangang idagdag nang hiwalay ang pribadong pag-sign in at cloud backup.">This version saves items only in this browser. Private sign-in and cloud backup must be added separately.</p><button class="button button-primary" value="cancel" data-en="Got it" data-fil="Naiintindihan ko">Got it</button></form></dialog>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
